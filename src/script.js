@@ -29,7 +29,7 @@ var geocoder;
 function Location(name, address) {
   this.name = name;
   this.address = address;
-  this.marker = null
+  this.marker = null;
   // latitude of the location set to initial default
   this.lat = ko.observable(bengaluru.lat);
   // longitude of the location set to initial default
@@ -41,11 +41,11 @@ function Location(name, address) {
     // close the side nav
     document.getElementById('nav-box').cheked = false;
     // center the map to the current location
-    if(cmarker !=null)
-    cmarker.setAnimation(null)
+    if(cmarker !== null)
+    cmarker.setAnimation(null);
     map.setCenter({lat:this.lat(),lng:this.lng()});
     // check if infowindow is already created for this location
-  if(this.infowindow == undefined)
+  if(this.infowindow === undefined)
   {
         var infowindow = new google.maps.InfoWindow({
       content: ('<h4>' + this.name + '</h4><p>'+this.address+'</p>'
@@ -54,8 +54,8 @@ function Location(name, address) {
       });
       this.infowindow = infowindow;
   }
-  this.marker.setAnimation(google.maps.Animation.BOUNCE)
-  cmarker = this.marker
+  this.marker.setAnimation(google.maps.Animation.BOUNCE);
+  cmarker = this.marker;
   // show the info window
   this.infowindow.open(map,this.marker);
 }.bind(this);
@@ -65,7 +65,6 @@ function Location(name, address) {
 function moreInfo(e){
   var b = $(e.target);
   var name = b.attr('data-name');
-  console.log(name)
   for(var i = 0; i < locations.length; i++)
   if(locations[i].name == name)
   break;
@@ -115,15 +114,14 @@ function moreInfo(e){
           viewModel.errorMsg(true);
           $('#retry-button').attr('data-name',loc.name);
         }
-      })
+      });
     },
     error:function(xhr,status){
       viewModel.showLoader(false);
       viewModel.errorMsg(true);
       $('#retry-button').attr('data-name',loc.name);
-      console.log($('#retry-button').attr('data-name'))
     }
-  })
+  });
 }
 
 
@@ -142,8 +140,8 @@ function LocationViewModel() {
   this.picNo = ko.observable(1);
   // close button
   this.closeExtra = function(){
-    this.showMoreInfo(false)
-  }
+    this.showMoreInfo(false);
+  };
   // show loader
   this.showLoader = ko.observable(true);
   //show ui
@@ -151,18 +149,18 @@ function LocationViewModel() {
   // show error msg
   this.errorMsg = ko.observable(false);
   // facebook url
-  this.facebook = ko.observable("https://facebook.com/profile.php?id=144613672271319")
+  this.facebook = ko.observable("https://facebook.com/profile.php?id=144613672271319");
   // current image in slideshow
   this.currentImage = ko.computed(function(){
-    return this.pics()[this.picNo() - 1]
+    return this.pics()[this.picNo() - 1];
   },this);
   // visiblity of left arrow
   this.leftArrowVisible = ko.computed(function(){
-    return this.picNo() > 1
+    return this.picNo() > 1;
   },this);
   // visiblity of right arrow
   this.rightArrowVisible = ko.computed(function(){
-    return this.picNo() < this.pics().length
+    return this.picNo() < this.pics().length;
   },this);
   // left arrow click
   this.leftArrowClick = function(){
@@ -175,7 +173,7 @@ function LocationViewModel() {
   // right arrow click
   this.rightArrowClick = function(){
     this.picNo(this.picNo() + 1);
-  }
+  };
   // likes for the location
   this.likes = ko.observable(10);
   // rating for the location
@@ -183,14 +181,14 @@ function LocationViewModel() {
   // contact info
   this.contactText = ko.observable("+911234567890");
   this.contactLink = ko.computed(function(){
-    return "tel:" + this.contactText()
+    return "tel:" + this.contactText();
   },this);
   // short foursquare url
-  this.shortUrl = ko.observable("https://www.google.com/")
+  this.shortUrl = ko.observable("https://www.google.com/");
   // name of the location
-  this.name = ko.observable(locations[0].name)
+  this.name = ko.observable(locations[0].name);
   // address of the location
-  this.address = ko.observable(locations[0].address)
+  this.address = ko.observable(locations[0].address);
   // locations after matching all locations with the location string
   this.filterList = ko.computed(function(){
           // trim and transform the string to lower case
@@ -199,11 +197,11 @@ function LocationViewModel() {
           var r = RegExp(s);
           // remove all previous visible markers in the map
           for(var i = 0; i < locations.length; i++){
-            if( locations[i].marker != null )
+            if( locations[i].marker !== null )
             locations[i].marker.setMap(null);
           }
           var li =  locations.filter(function(loc,index){
-            if ( s == 0 )
+            if ( s.length === 0 )
             {
               // if the location string is empty display all the locations
               var marker = new google.maps.Marker({
@@ -220,17 +218,17 @@ function LocationViewModel() {
               var bool = r.test(loc.name.toLowerCase());
               if(bool){
                 // draw the marketr in the map
-                var marker = new google.maps.Marker({
+                var marker2 = new google.maps.Marker({
                   position: {lat:loc.lat(),lng:loc.lng()},
                   map: map
                 });
-                marker.setAnimation(null);
-                loc.marker = marker;
-                marker.addListener('click',loc.showInfo);
+                marker2.setAnimation(null);
+                loc.marker = marker2;
+                marker2.addListener('click',loc.showInfo);
               }
+              return bool;
           }
-          return bool;
-        })
+        });
         // set the center of the map to the first location
         if( li.length > 0){
             map.setCenter({lat:li[0].lat(),lng:li[0].lng()});
@@ -249,16 +247,16 @@ function initMap() {
   });
 
   $(document).ready(function(){
-    geocoder = new google.maps.Geocoder()
+    geocoder = new google.maps.Geocoder();
     // initialize defualt locations
     locations.push(new Location('Meghana Foods',
     '52, 1st Floor, 33rd Cross, 4th Block, Near Cafe Coffee Day, Jaya Nagar, Bengaluru, Karnataka 560011'));
-    locations.push(new Location('Taaza Thindi','1005, 26th Main Rd, 4th T Block East, Jayanagara 9th Block, Jayanagar, Bengaluru, Karnataka 560041'))
-    locations.push(new Location('Vidyarthi Bhavan','32, Gandhi Bazaar Main Rd, Gandhi Bazaar, Basavanagudi, Bengaluru, Karnataka 560004'))
-    locations.push(new Location('JW Kitchen','JW Marriott Bengaluru, 24/1, Vittal Mallya Rd, Ashok Nagar, Bengaluru, Karnataka 560001'))
-    locations.push(new Location('Karavalli',' Ground Floor,The Gateway Hotel, #66, Residency Road, Bengaluru, Karnataka 560025'))
-    locations.push(new Location('La Brasserie Restaurant','28, Hotel Le Meridien, Sankeys Road, Bengaluru, Karnataka 560052'))
-    locations.push(new Location('Persian Terrace',' 26/1, 4th Floor, Sheeraton Grand Bangalore Hotel at Brigade Gateway, Dr. Rajkumar Road, Malleswaram-Rajajinagar, Bengaluru, Karnataka 560055'))
+    locations.push(new Location('Taaza Thindi','1005, 26th Main Rd, 4th T Block East, Jayanagara 9th Block, Jayanagar, Bengaluru, Karnataka 560041'));
+    locations.push(new Location('Vidyarthi Bhavan','32, Gandhi Bazaar Main Rd, Gandhi Bazaar, Basavanagudi, Bengaluru, Karnataka 560004'));
+    locations.push(new Location('JW Kitchen','JW Marriott Bengaluru, 24/1, Vittal Mallya Rd, Ashok Nagar, Bengaluru, Karnataka 560001'));
+    locations.push(new Location('Karavalli',' Ground Floor,The Gateway Hotel, #66, Residency Road, Bengaluru, Karnataka 560025'));
+    locations.push(new Location('La Brasserie Restaurant','28, Hotel Le Meridien, Sankeys Road, Bengaluru, Karnataka 560052'));
+    locations.push(new Location('Persian Terrace',' 26/1, 4th Floor, Sheeraton Grand Bangalore Hotel at Brigade Gateway, Dr. Rajkumar Road, Malleswaram-Rajajinagar, Bengaluru, Karnataka 560055'));
     locations.map(function(l){
       // for each location to be displayed find the actual lattitude and longitude
       // using google geocoder api
@@ -270,9 +268,9 @@ function initMap() {
           alert('Geocode was not successful for the following reason: ' + status);
         }
       });
-    })
-    viewModel = new LocationViewModel()
+    });
+    viewModel = new LocationViewModel();
     // bind the view model to the knockout js
     ko.applyBindings(viewModel);
-  })
+  });
 }

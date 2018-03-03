@@ -5,8 +5,9 @@ Used Google Map's API and foursquare API for map data and information about Rest
 ### How to run the code
 1. Clone or download this repo.
 1. change directory using ``` cd Neighbourhood-map ```
+1. Follow the Dependencies instructions
 1. Run using ``` npm run start ```
-4. Project is running in [http://localhost:5000](http://localhost:5000)
+1. Project is running in [http://localhost:5000](http://localhost:5000)
 
 ### Dependencies while building project
 1. Uglify-es can be installed by ```sudo npm install -g uglify-es ```
