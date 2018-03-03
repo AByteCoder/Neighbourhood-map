@@ -8,8 +8,7 @@ var viewModel;
 //foursquare api base url
 const foursquareUrl = "https://api.foursquare.com/v2/venues/";
 //foursquare api authentication part
-const keyUrl = ("client_id=" + foursquare.id + "&client_secret="
-+ foursquare.secret + "&v=20180302&limit=1");
+const keyUrl = ("client_id=" + foursquare.id + "&client_secret=" + foursquare.secret + "&v=20180302&limit=1");
 // default center location
 const bengaluru = {lat: 12.909973, lng:77.572646};
 // will contain all the locations
@@ -48,9 +47,7 @@ function Location(name, address) {
   if(this.infowindow === undefined)
   {
         var infowindow = new google.maps.InfoWindow({
-      content: ('<h4>' + this.name + '</h4><p>'+this.address+'</p>'
-      + '<button onclick="moreInfo(event)" class="info-button" data-name="'
-      + this.name +'">More Info</button>')
+      content: ('<h4>' + this.name + '</h4><p>'+this.address+'</p>' + '<button onclick="moreInfo(event)" class="info-button" data-name="' + this.name +'">More Info</button>')
       });
       this.infowindow = infowindow;
   }
@@ -104,8 +101,7 @@ function moreInfo(e){
           viewModel.ratings(venue.rating);
           viewModel.shortUrl(venue.shortUrl);
           viewModel.picNo(1);
-          viewModel.facebook("https://facebook.com/profile.php?id="
-          + venue.contact.facebook);
+          viewModel.facebook("https://facebook.com/profile.php?id=" + venue.contact.facebook);
           viewModel.showLoader(false);
           viewModel.showData(true);
         },
