@@ -1,0 +1,26 @@
+{
+  "name": "neighbourhood-map",
+  "version": "1.0.0",
+  "description": "Fifth project for udacity fullstack nanodegree",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cp src/index.html dst/index.html && uglifyjs src/script.js > dst/script.js && uglifycss src/style.css > dst/style.css",
+    "start" :"cd dst && python -m SimpleHTTPServer 5000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AByteCoder/Neighbourhood-map.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AByteCoder/Neighbourhood-map/issues"
+  },
+  "homepage": "https://github.com/AByteCoder/Neighbourhood-map#readme",
+  "devDependencies": {
+    "uglify-es": "^3.3.9",
+    "uglifycss": "0.0.28"
+  },
+  "dependencies": {}
+}
