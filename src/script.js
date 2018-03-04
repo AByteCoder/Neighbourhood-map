@@ -1,4 +1,3 @@
-'use strict';
 // foursquare api details
 const FOURSQUARE = {
   id : "TRXK51Z4CZ4KTSD4G23S0SUKUG2EZT2Z1N4GMM3WFVGHXAWL",
@@ -298,13 +297,13 @@ function initMap() {
               calculateBounds();
             loc.marker.addListener('click',loc.showInfo);
           }else if(loc.marker.position.lat().toFixed(6) === BENGALURU.lat.toFixed(6) && loc.marker.position.lng().toFixed(6) === BENGALURU.lng.toFixed(6)) {
-            var marker = new google.maps.Marker({
+            var marker3 = new google.maps.Marker({
               position: {lat:loc.lat(),lng:loc.lng()},
               map: map
             });
-            marker.setAnimation(loc.marker.getAnimation());
+            marker3.setAnimation(loc.marker.getAnimation());
             loc.marker.setMap(null);
-            loc.marker = marker;
+            loc.marker = marker3;
               calculateBounds();
             loc.marker.addListener('click',loc.showInfo);
           }
