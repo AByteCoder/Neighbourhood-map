@@ -5,14 +5,9 @@
   <meta charset="utf-8" >
   <meta name="viewport" content="width=device-width,initial-scale=1.0" >
   <link rel="stylesheet" href="style.css" >
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
-  <script src="http://knockoutjs.com/downloads/knockout-3.4.2.js"></script>
-  <script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCz5LogDLQ32AyJBNyYOChZu215LmNelUg&callback=initMap">
-  </script>
-  <script src="script.js"></script>
+
 </head>
 <body>
   <header id="header">
@@ -37,11 +32,11 @@
     </div>
     <div class="error-msg" data-bind="if:errorMsg">
       <i class="material-icons">&#xE000;</i> <span>Some error occured </span>
-      <button id="retry-button" onClick="moreInfo(event)" data-name=""><i class="material-icons">&#xE5D5;</i>Retry</button>
+      <button id="retry-button" data-bind="click:moreInfo" data-name=""><i class="material-icons">&#xE5D5;</i>Retry</button>
     </div>
     <div class="scroll-view" data-bind="if:showData">
       <div id="slideshow-info">
-        <img data-bind="attr:{src:currentImage}"/>
+        <img data-bind="attr:{src:currentImage,alt:currentAlt}"/>
         <div id="left-arrow" data-bind="visible:leftArrowVisible,click:leftArrowClick">
           <i class="material-icons">&#xE5CB;</i>
         </div>
@@ -76,8 +71,13 @@
           </tr>
         </table>
       </div>
-    </div>
     <button id="close-button" data-bind="click : closeExtra">Close</button>
   </aside>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="http://knockoutjs.com/downloads/knockout-3.4.2.js"></script>
+  <script src="script.js"></script>
+  <script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCz5LogDLQ32AyJBNyYOChZu215LmNelUg&callback=initMap" onerror ="googleError()">
+  </script>
 </body>
 </html>
